@@ -9,19 +9,15 @@ Ejemplo de aplicación que muestra un listado de productos alimenticios y utiliz
 
 ## Uso rápido
 
-1. Instalar dependencias en ambos proyectos.
+1. Desde la raíz del repositorio instala todas las dependencias:
    ```bash
-   cd backend && npm install
-   cd ../next-app && npm install
+   npm install
    ```
-2. Ejecutar el backend de Nest.js:
-   ```bash
-   npm start
-   ```
-3. En otro terminal, ejecutar la app de Next.js:
+2. Levanta la aplicación completa:
    ```bash
    npm run dev
    ```
-4. Visitar `http://localhost:3000` y solicitar recomendaciones.
+   Se abrirá automáticamente `http://localhost:3000` en tu navegador.
+3. Solicita recomendaciones desde la página.
 
 Para que las recomendaciones funcionen es necesario tener corriendo un servidor `ollama` local en `http://localhost:11434`.
