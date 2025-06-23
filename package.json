@@ -1,0 +1,16 @@
+{
+  "name": "kanter-otero-seminarioia",
+  "private": true,
+  "scripts": {
+    "postinstall": "npm install --prefix backend && npm install --prefix next-app",
+    "start-backend": "npm start --prefix backend",
+    "dev-next": "npm run dev --prefix next-app",
+    "open": "wait-on http://localhost:3000 && open-cli http://localhost:3000",
+    "dev": "concurrently -k \"npm run start-backend\" \"npm run dev-next\" \"npm run open\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "open-cli": "^8.0.0",
+    "wait-on": "^7.0.1"
+  }
+}
