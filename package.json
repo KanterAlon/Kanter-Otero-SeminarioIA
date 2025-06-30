@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
-    "open": "^9.2.0",
+    "open": "^9.1.0",
     "wait-on": "^7.0.1"
   }
 }
