@@ -9,10 +9,13 @@ Ejemplo de aplicación que muestra un listado de productos alimenticios y utiliz
 
 ## Uso rápido
 
-1. Desde la raíz del repositorio instala todas las dependencias:
+1. Desde la raíz del repositorio instala todas las dependencias ejecutando:
    ```bash
    npm install
    ```
+   Este comando invoca `install.js`, un pequeño script que instala las
+   dependencias de `backend` y `next-app`. En Windows también puede ejecutarse
+   manualmente con `node install.js` si aparece algún problema con `npm`.
 2. Levanta la aplicación completa:
    ```bash
    npm run dev

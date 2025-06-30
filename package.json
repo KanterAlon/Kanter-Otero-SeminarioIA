@@ -2,7 +2,7 @@
   "name": "kanter-otero-seminarioia",
   "private": true,
   "scripts": {
-    "postinstall": "npm install --prefix backend && npm install --prefix next-app",
+    "postinstall": "node install.js",
     "start-backend": "npm start --prefix backend",
     "dev-next": "npm run dev --prefix next-app",
     "open": "wait-on http://localhost:3000 && open http://localhost:3000",
