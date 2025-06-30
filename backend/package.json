@@ -4,7 +4,7 @@
   "main": "dist/main.js",
   "license": "MIT",
   "scripts": {
-    "start": "nest start"
+    "start": "npx nest start"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
@@ -13,5 +13,10 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
     "node-fetch": "^2.6.9"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^10.2.0",
+    "typescript": "^5.2.2",
+    "ts-node": "^10.9.1"
   }
 }
