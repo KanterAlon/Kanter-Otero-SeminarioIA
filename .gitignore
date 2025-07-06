@@ -1,3 +1,6 @@
 node_modules
 .next
 backend/dist
+package-lock.json
+backend/package-lock.json
+next-app/package-lock.json

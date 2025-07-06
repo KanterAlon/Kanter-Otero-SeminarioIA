@@ -6,7 +6,7 @@
     "start-backend": "npm start --prefix backend",
     "dev-next": "npm run dev --prefix next-app",
     "open": "wait-on http://localhost:3000 && open-cli http://localhost:3000",
-    "dev": "concurrently --raw -k \"npm run start-backend\" \"npm run dev-next\" \"npm run open\""
+    "dev": "concurrently --raw \"npm run start-backend\" \"npm run dev-next\" \"npm run open\""
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
