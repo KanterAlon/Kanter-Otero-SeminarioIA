@@ -5,12 +5,12 @@
     "postinstall": "node install.js",
     "start-backend": "npm start --prefix backend",
     "dev-next": "npm run dev --prefix next-app",
-    "open": "wait-on http://localhost:3000 && open http://localhost:3000",
+    "open": "wait-on http://localhost:3000 && open-cli http://localhost:3000",
     "dev": "concurrently --raw -k \"npm run start-backend\" \"npm run dev-next\" \"npm run open\""
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
-    "open": "^9.1.0",
+    "open-cli": "^8.0.0",
     "wait-on": "^7.0.1"
   }
 }
