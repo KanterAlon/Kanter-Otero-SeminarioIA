@@ -1,6 +1,10 @@
 import { useState } from 'react'
-import { FaAppleAlt, FaCarrot, FaBreadSlice } from 'react-icons/fa'
-import { FaCow } from 'react-icons/fa6'
+import dynamic from 'next/dynamic'
+
+const FaAppleAlt = dynamic(() => import('react-icons/fa').then(m => m.FaAppleAlt), { ssr: false })
+const FaCarrot = dynamic(() => import('react-icons/fa').then(m => m.FaCarrot), { ssr: false })
+const FaBreadSlice = dynamic(() => import('react-icons/fa').then(m => m.FaBreadSlice), { ssr: false })
+const FaCow = dynamic(() => import('react-icons/fa6').then(m => m.FaCow), { ssr: false })
 
 const products = [
   {
