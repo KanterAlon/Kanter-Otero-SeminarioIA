@@ -14,14 +14,21 @@ export class RecommendController {
       body: JSON.stringify({ model: 'llama2', prompt })
     })
 
-    const reader = res.body?.getReader()
     let text = ''
-    if (reader) {
-      const decoder = new TextDecoder()
-      while (true) {
-        const { done, value } = await reader.read()
-        if (done) break
-        text += decoder.decode(value, { stream: true })
+    const bodyStream: any = res.body
+    if (bodyStream) {
+      if (typeof bodyStream.getReader === 'function') {
+        const reader = bodyStream.getReader()
+        const decoder = new TextDecoder()
+        while (true) {
+          const { done, value } = await reader.read()
+          if (done) break
+          text += decoder.decode(value, { stream: true })
+        }
+      } else {
+        for await (const chunk of bodyStream as any) {
+          text += chunk.toString()
+        }
       }
     }
 
