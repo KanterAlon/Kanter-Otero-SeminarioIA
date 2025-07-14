@@ -48,39 +48,49 @@ export default function Home() {
   const [preferences, setPreferences] = useState('')
   const [recommendation, setRecommendation] = useState('')
   const [loading, setLoading] = useState(false)
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setLoading(true)
-    console.log('[UI] Enviando preferencias al backend:', preferences)
-    try {
-      const res = await fetch('http://localhost:3001/recommend', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ preferences, products: products.map(p => p.name) })
-      })
-      if (!res.ok) {
-        const text = await res.text()
-        console.error('[UI] Error del backend:', res.status, text)
-        setRecommendation('')
-      } else {
-        const data = await res.json()
-        console.log('[UI] Recomendación recibida:', data.recommendation)
-        setRecommendation(data.recommendation)
-      }
-    } catch (err) {
-      console.error('[UI] Error al conectar con el backend:', err)
+  const [highlighted, setHighlighted] = useState('')
+const handleSubmit = async (e) => {
+  e.preventDefault()
+  setLoading(true)
+  console.log('[UI] Enviando preferencias al backend:', preferences)
+  try {
+    const res = await fetch('http://localhost:3001/recommend', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ preferences, products: products.map(p => p.name) })
+    })
+    if (!res.ok) {
+      const text = await res.text()
+      console.error('[UI] Error del backend:', res.status, text)
       setRecommendation('')
+      setHighlighted('')
+    } else {
+      const data = await res.json()
+      console.log('[UI] Recomendación recibida:', data.recommendation)
+      setRecommendation(data.recommendation)
+      const match = products.find(p =>
+        data.recommendation.toLowerCase().includes(p.name.toLowerCase())
+      )
+      setHighlighted(match ? match.name : '')
     }
-    setLoading(false)
+  } catch (err) {
+    console.error('[UI] Error al conectar con el backend:', err)
+    setRecommendation('')
+    setHighlighted('')
   }
+  setLoading(false)
+}
+
 
   return (
     <div className="p-4 md:p-8 space-y-6 max-w-4xl mx-auto">
       <h1 className="text-3xl font-bold text-center">Lista de productos</h1>
       <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
         {products.map(({ name, description, varieties, icon: Icon }) => (
-          <div key={name} className="border rounded-lg p-4 flex flex-col items-center space-y-2 bg-white shadow">
+          <div
+            key={name}
+            className={`border rounded-lg p-4 flex flex-col items-center space-y-2 bg-white shadow ${highlighted === name ? 'border-blue-500 bg-blue-50' : ''}`}
+          >
             <Icon className="text-3xl text-blue-600" />
             <h2 className="font-semibold">{name}</h2>
             <p className="text-sm text-gray-600 text-center">{description}</p>
@@ -108,7 +118,9 @@ export default function Home() {
       )}
       {recommendation && !loading && (
         <div className="mt-4 p-4 bg-yellow-50 border-l-4 border-yellow-500 text-yellow-700 text-center font-semibold rounded">
-          Producto recomendado: {recommendation}
+          {highlighted
+            ? `Producto recomendado: ${highlighted}`
+            : `Respuesta del modelo: ${recommendation}`}
         </div>
       )}
     </div>

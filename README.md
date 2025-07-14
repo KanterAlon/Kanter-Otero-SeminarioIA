@@ -21,7 +21,9 @@ Ejemplo de aplicación que muestra un listado de productos alimenticios y utiliz
    npm run dev
    ```
    Se abrirá automáticamente `http://localhost:3000` en tu navegador.
+
 3. Solicita recomendaciones desde la página.
+   Al obtener una respuesta el producto elegido se resaltará en la lista para que sea fácil de identificar.
 
 Para que las recomendaciones funcionen es necesario tener corriendo un servidor `ollama` local en `http://localhost:11434`.
 
