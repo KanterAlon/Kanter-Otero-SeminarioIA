@@ -89,7 +89,7 @@ const handleSubmit = async (e) => {
         {products.map(({ name, description, varieties, icon: Icon }) => (
           <div
             key={name}
-            className={`border rounded-lg p-4 flex flex-col items-center space-y-2 bg-white shadow ${highlighted === name ? 'border-blue-500 bg-blue-50' : ''}`}
+            className={`border rounded-lg p-4 flex flex-col items-center space-y-2 bg-white shadow transition-all ${highlighted === name ? 'border-blue-500 bg-blue-50 ring-4 ring-blue-300 recommend-highlight' : ''}`}
           >
             <Icon className="text-3xl text-blue-600" />
             <h2 className="font-semibold">{name}</h2>
