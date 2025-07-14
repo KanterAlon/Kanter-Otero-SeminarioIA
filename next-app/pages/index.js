@@ -52,13 +52,26 @@ export default function Home() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
-    const res = await fetch('http://localhost:3001/recommend', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ preferences, products: products.map(p => p.name) })
-    })
-    const data = await res.json()
-    setRecommendation(data.recommendation)
+    console.log('[UI] Enviando preferencias al backend:', preferences)
+    try {
+      const res = await fetch('http://localhost:3001/recommend', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ preferences, products: products.map(p => p.name) })
+      })
+      if (!res.ok) {
+        const text = await res.text()
+        console.error('[UI] Error del backend:', res.status, text)
+        setRecommendation('')
+      } else {
+        const data = await res.json()
+        console.log('[UI] Recomendación recibida:', data.recommendation)
+        setRecommendation(data.recommendation)
+      }
+    } catch (err) {
+      console.error('[UI] Error al conectar con el backend:', err)
+      setRecommendation('')
+    }
     setLoading(false)
   }
 
