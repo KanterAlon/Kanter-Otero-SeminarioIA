@@ -5,9 +5,10 @@ import fetch from 'node-fetch'
 export class RecommendController {
   @Post('recommend')
   async recommend(@Body() body: { preferences: string; products: string[] }) {
-    const prompt = `Tengo los siguientes productos: ${body.products.join(', ')}.\n` +
+    const prompt =
+      `Tengo los siguientes productos: ${body.products.join(', ')}.\n` +
       `El usuario prefiere: ${body.preferences}.\n` +
-      'Recomienda un solo producto de la lista.'
+      'Recomienda un solo producto de la lista y responde únicamente en español.'
     const res = await fetch('http://localhost:11434/api/generate', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

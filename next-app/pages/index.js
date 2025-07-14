@@ -82,7 +82,7 @@ export default function Home() {
       <form onSubmit={handleSubmit} className="space-y-2">
         <textarea
           className="border p-2 w-full rounded"
-          placeholder="Ingresa tus preferencias"
+          placeholder="Describe tus preferencias (por ejemplo: me gustan las frutas dulces)"
           value={preferences}
           onChange={e => setPreferences(e.target.value)}
         />
@@ -94,7 +94,9 @@ export default function Home() {
         </div>
       )}
       {recommendation && !loading && (
-        <p className="mt-4 text-center">Recomendación: {recommendation}</p>
+        <div className="mt-4 p-4 bg-yellow-50 border-l-4 border-yellow-500 text-yellow-700 text-center font-semibold rounded">
+          Producto recomendado: {recommendation}
+        </div>
       )}
     </div>
   )
