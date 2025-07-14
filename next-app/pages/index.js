@@ -5,6 +5,11 @@ const FaAppleAlt = dynamic(() => import('react-icons/fa').then(m => m.FaAppleAlt
 const FaCarrot = dynamic(() => import('react-icons/fa').then(m => m.FaCarrot), { ssr: false })
 const FaBreadSlice = dynamic(() => import('react-icons/fa').then(m => m.FaBreadSlice), { ssr: false })
 const FaCow = dynamic(() => import('react-icons/fa6').then(m => m.FaCow), { ssr: false })
+const FaCheese = dynamic(() => import('react-icons/fa').then(m => m.FaCheese), { ssr: false })
+const FaEgg = dynamic(() => import('react-icons/fa').then(m => m.FaEgg), { ssr: false })
+const FaFish = dynamic(() => import('react-icons/fa').then(m => m.FaFish), { ssr: false })
+const FaLemon = dynamic(() => import('react-icons/fa').then(m => m.FaLemon), { ssr: false })
+const FaDrumstickBite = dynamic(() => import('react-icons/fa').then(m => m.FaDrumstickBite), { ssr: false })
 
 const products = [
   {
@@ -41,6 +46,41 @@ const products = [
     description: 'Con fibra y sabor',
     varieties: ['Con semillas', 'Sin semillas'],
     icon: FaBreadSlice
+  },
+  {
+    name: 'Queso',
+    category: 'Lácteos',
+    description: 'Curado y fresco',
+    varieties: ['Cheddar', 'Mozzarella'],
+    icon: FaCheese
+  },
+  {
+    name: 'Huevos',
+    category: 'Proteínas',
+    description: 'De gallina y codorniz',
+    varieties: ['Blancos', 'Marrones'],
+    icon: FaEgg
+  },
+  {
+    name: 'Pescado',
+    category: 'Mariscos',
+    description: 'Fresco del día',
+    varieties: ['Salmón', 'Atún'],
+    icon: FaFish
+  },
+  {
+    name: 'Limones',
+    category: 'Frutas',
+    description: 'Ideales para jugo',
+    varieties: ['Eureka', 'Lisboa'],
+    icon: FaLemon
+  },
+  {
+    name: 'Pollo',
+    category: 'Carnes',
+    description: 'Libre de hormonas',
+    varieties: ['Pechuga', 'Muslo'],
+    icon: FaDrumstickBite
   }
 ]
 
