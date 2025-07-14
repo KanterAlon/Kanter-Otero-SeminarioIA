@@ -48,6 +48,7 @@ export default function Home() {
   const [preferences, setPreferences] = useState('')
   const [recommendation, setRecommendation] = useState('')
   const [loading, setLoading] = useState(false)
+  const [highlighted, setHighlighted] = useState('')
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -59,6 +60,10 @@ export default function Home() {
     })
     const data = await res.json()
     setRecommendation(data.recommendation)
+    const match = products.find(p =>
+      data.recommendation.toLowerCase().includes(p.name.toLowerCase())
+    )
+    setHighlighted(match ? match.name : '')
     setLoading(false)
   }
 
@@ -67,7 +72,10 @@ export default function Home() {
       <h1 className="text-3xl font-bold text-center">Lista de productos</h1>
       <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
         {products.map(({ name, description, varieties, icon: Icon }) => (
-          <div key={name} className="border rounded-lg p-4 flex flex-col items-center space-y-2 bg-white shadow">
+          <div
+            key={name}
+            className={`border rounded-lg p-4 flex flex-col items-center space-y-2 bg-white shadow ${highlighted === name ? 'border-blue-500 bg-blue-50' : ''}`}
+          >
             <Icon className="text-3xl text-blue-600" />
             <h2 className="font-semibold">{name}</h2>
             <p className="text-sm text-gray-600 text-center">{description}</p>
@@ -95,7 +103,9 @@ export default function Home() {
       )}
       {recommendation && !loading && (
         <div className="mt-4 p-4 bg-yellow-50 border-l-4 border-yellow-500 text-yellow-700 text-center font-semibold rounded">
-          Producto recomendado: {recommendation}
+          {highlighted
+            ? `Producto recomendado: ${highlighted}`
+            : `Respuesta del modelo: ${recommendation}`}
         </div>
       )}
     </div>
