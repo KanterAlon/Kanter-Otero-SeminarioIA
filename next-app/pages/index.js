@@ -49,23 +49,38 @@ export default function Home() {
   const [recommendation, setRecommendation] = useState('')
   const [loading, setLoading] = useState(false)
   const [highlighted, setHighlighted] = useState('')
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setLoading(true)
+const handleSubmit = async (e) => {
+  e.preventDefault()
+  setLoading(true)
+  console.log('[UI] Enviando preferencias al backend:', preferences)
+  try {
     const res = await fetch('http://localhost:3001/recommend', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ preferences, products: products.map(p => p.name) })
     })
-    const data = await res.json()
-    setRecommendation(data.recommendation)
-    const match = products.find(p =>
-      data.recommendation.toLowerCase().includes(p.name.toLowerCase())
-    )
-    setHighlighted(match ? match.name : '')
-    setLoading(false)
+    if (!res.ok) {
+      const text = await res.text()
+      console.error('[UI] Error del backend:', res.status, text)
+      setRecommendation('')
+      setHighlighted('')
+    } else {
+      const data = await res.json()
+      console.log('[UI] Recomendación recibida:', data.recommendation)
+      setRecommendation(data.recommendation)
+      const match = products.find(p =>
+        data.recommendation.toLowerCase().includes(p.name.toLowerCase())
+      )
+      setHighlighted(match ? match.name : '')
+    }
+  } catch (err) {
+    console.error('[UI] Error al conectar con el backend:', err)
+    setRecommendation('')
+    setHighlighted('')
   }
+  setLoading(false)
+}
+
 
   return (
     <div className="p-4 md:p-8 space-y-6 max-w-4xl mx-auto">
